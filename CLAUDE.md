@@ -9,7 +9,16 @@
 - **Status:** projeto ainda não iniciado.
 - **Objetivo:** _a definir_
 
+## Identidade visual
+- Marca: **UYSI G-Lab** = símbolo UYSI + ícone G-Lab (microscópio do legado) lado a lado. Ativos em `assets/brand/`.
+- Cores/tema: família UYSI (`assets/brand/tokens-cores.css`, mesma do projeto UYSI Service). Só variáveis de cor, nunca cor fixa; tema claro/escuro por `data-tema`.
+- `laboratorio/images/logo.png` é logo de cliente (SSPM): não usar como marca.
+
+## Legado e dados sensíveis
+- O legado PHP/MySQL está em `laboratorio/` (analisado em `docs/PLANO_DE_TRABALHO.md`). Contém dados reais de pacientes e credenciais: **não commitar** `laboratorio/`, `*.sql`, `*.pem`, `.env`.
+
 ## Stack
+- Alvo: Go (API + gateway de instrumentos), PostgreSQL, agente C# (serial), LGPD. Ver plano.
 _a definir_
 
 ## Convenções

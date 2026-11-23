@@ -1,0 +1,26 @@
+# Legado e dados sensíveis (LGPD): nunca versionar
+/laboratorio/
+*.sql
+*.sql.gz
+*.dump
+*.bak
+*.pem
+*.pfx
+*.p12
+*.key
+*.crt
+.env
+.env.*
+!.env.example
+recebidos/
+uploads/
+
+# Capturas brutas de equipamentos (contêm identificadores de pacientes)
+*.astm.txt
+*.hl7
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

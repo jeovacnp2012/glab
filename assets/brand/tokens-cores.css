@@ -1,0 +1,78 @@
+/*
+ * Identidade visual UYSI (mesma família do UYSI APS, UYSI CAF e uysilicitaproc).
+ * O tema escuro troca a escala de cores em :root[data-tema="escuro"]; o resto usa só as variáveis.
+ */
+:root {
+    --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+
+    --white: #ffffff;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cad5e2;
+    --slate-400: #90a1b9;
+    --slate-500: #62748e;
+    --slate-600: #45556c;
+    --slate-700: #314158;
+    --slate-800: #1d293d;
+    --slate-900: #0f172b;
+
+    --brand-50: #eef5fc;
+    --brand-100: #d3e6f8;
+    --brand-300: #6fabe4;
+    --brand-400: #3f8bd6;
+    --brand-500: #1e6fbf;
+    --brand-600: #155a9e;
+    --brand-700: #124a82;
+    --brand-900: #0f3357;
+
+    --ok: #0f7a5c;
+    --ok-fundo: #e6f6f0;
+    --perigo: #c20039;
+    --perigo-fundo: #fdecf1;
+    --aviso: #b75000;
+    --aviso-fundo: #fff3e0;
+
+    --marca: var(--brand-600);
+    --fundo: var(--slate-100);
+    --superficie: var(--white);
+    --borda: var(--slate-200);
+    --texto: var(--slate-800);
+    --suave: var(--slate-500);
+    --marca-fraca: var(--brand-50);
+    --anel: var(--brand-400);
+
+    --radius: 0.75rem;
+    --sombra: 0 1px 2px rgb(15 23 43 / 0.06), 0 4px 16px rgb(15 23 43 / 0.06);
+    --largura-menu: 15rem;
+}
+
+:root[data-tema='escuro'] {
+    color-scheme: dark;
+
+    --white: #111a2b;
+    --slate-50: #0f1727;
+    --slate-100: #0a1220;
+    --slate-200: #24314a;
+    --slate-300: #34445f;
+    --slate-400: #7d8ba3;
+    --slate-500: #98a6bc;
+    --slate-600: #b6c2d3;
+    --slate-700: #ccd5e2;
+    --slate-800: #e3e9f1;
+    --slate-900: #f1f5f9;
+
+    --brand-50: #13203a;
+    --brand-100: #182b4d;
+
+    --ok: #6ee7b7;
+    --ok-fundo: #0f2620;
+    --perigo: #fda4af;
+    --perigo-fundo: #2a1621;
+    --aviso: #fcd34d;
+    --aviso-fundo: #2a2112;
+
+    --marca: var(--brand-300);
+    --marca-fraca: var(--brand-50);
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.35);
+}
