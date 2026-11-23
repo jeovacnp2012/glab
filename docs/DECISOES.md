@@ -52,3 +52,33 @@
 ## D-004 — Regra de versionamento e dados (LGPD)
 
 Este repositório **não versiona** o legado nem dados de pacientes: `laboratorio/`, dumps SQL, certificados/chaves, `.env`, capturas brutas de equipamentos e uploads estão no `.gitignore`. O legado fica só na máquina local. Nenhuma credencial ou dado pessoal entra em commits, mensagens ou logs; desenvolvimento e testes usam dados sintéticos.
+
+## D-005 — Plano revisado de encaixe no UYSI Service (2026-11-23)
+
+Retorno da sessão uysi_go_service, gravado no repositório do UYSI Service em `docs/21-plano-glab.md` (somente leitura aqui; nada codado, nada na VPS, nenhum dado real lido).
+
+**Decisões de arquitetura propostas (a aprovar pelo usuário):**
+1. O G-Lab é o painel `lab` do UYSI Service (ao lado de `tickets`, `procurement` e `ceaf`); código em `api/` e `web/` do UYSI Service, tabelas `lab_*` no banco da empresa (migrations goose).
+2. Uma empresa por laboratório (um banco PostgreSQL por empresa); sem RLS. Vários postos/unidades = Setores.
+3. Equipamentos nunca expostos à internet: agente local na rede do laboratório envia por HTTPS com token `uysi_...` (só SHA-256 no banco, revogável); mTLS opcional pelo Nginx. O "gateway Go" vira modo do agente ou listener opcional só em rede privada/VPN.
+4. Reaproveitar do UYSI: login, permissões por painel, auditoria imutável, PDF, exportação, segredos cifrados (`UYSI_SECRET_KEY`), rotinas de 6 h, deploy e backup.
+5. Novo: parsers ASTM E1381/E1394 e HL7 v2/MLLP, TOTP para liberar laudo, cifra de CPF/CNS/nome da mãe com blind index (HMAC), `lab_access_log` (log de leitura), retenção e limpeza do bruto cifrado.
+6. Resultados e laudos versionados (correção = nova versão), sem Lixeira; paciente com exclusão lógica + anonimização.
+7. Chave de ingestão: ID de amostra/código de barras gerado pelo sistema (protocolo como alternativa), não só o número do protocolo.
+8. Este repositório (`g_lab`) fica com: agente C#, simulador de analisador, capturas (sem dados reais) e documentação.
+
+**Fases revisadas:** 0 preparação · 1 infraestrutura do painel `lab` · 2 cadastros e pacientes · 3 núcleo do LIS manual · 4 instrumentos e ingestão (parsers + simulador, maior risco, antes do agente) · 5 agente local · 6 bidirecional e demais equipamentos · 7 integrações e painéis · 8 migração e go-live (`migrate-lab`, MD5 não migra, ensaio com dados mascarados) · 9 conformidade contínua.
+
+**Decisões de negócio ainda em aberto (do usuário):**
+1. Modelos exatos do C4000 e do Pentra 60; Ethernet ou só RS-232; manuais de interface.
+2. Uma empresa por laboratório (recomendado) ou vários laboratórios na mesma empresa.
+3. Hospedagem: VPS atual, servidor do cliente ou híbrido.
+4. Assinatura do laudo: A1 por laboratório (cofre cifrado), A3/token ou serviço de assinatura.
+5. Encarregado (DPO) e base legal do uso analítico no banco de projetos.
+6. Escopo da migração: histórico completo ou últimos N anos.
+7. SUS: CADSUS, SIGTAP e faturamento (BPA).
+8. Portal do paciente.
+9. **Agente: C# (pedido original) ou Go** — a sessão sugere avaliar Go para reaproveitar os parsers da fase 4.
+10. Prazo de retenção do laudo e do bruto de equipamento (jurídico).
+
+**Próximo passo sugerido:** responder ao menos os itens 1, 2, 3 e 9 e aprovar a Fase 1. A proteção do repositório (`.gitignore`) já foi feita (D-004).
